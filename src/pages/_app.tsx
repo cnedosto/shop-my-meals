@@ -1,6 +1,11 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import { MealsProvider } from '@/context/mealsContext';
+import '@/styles/globals.css';
+import type { AppProps } from 'next/app';
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <MealsProvider>
+      <Component {...pageProps} />
+    </MealsProvider>
+  );
 }
