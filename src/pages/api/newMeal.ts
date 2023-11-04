@@ -10,10 +10,10 @@ import puppeteer from 'puppeteer';
 type Data = {
   title: string;
   image: string;
-  ingredients: { quantity: string; ingredient: string; imgSrc: string }[];
+  ingredients: { quantity: string; ingredient: string | null; imgSrc: string | null }[];
   tags: string[];
-  prepTime: string;
-  kCal: string;
+  prepTime: string | null;
+  kCal: string | null;
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
@@ -40,12 +40,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     await browser.close();
 
     return {
-      title,
-      image,
-      ingredients,
+      title: title || '',
+      image: image || '',
+      ingredients: ingredients.map((ingredient) => ({
+        quantity: ingredient.quantity,
+        ingredient: ingredient.ingredient || '',
+        imgSrc: ingredient.imgSrc || '',
+      })),
       tags,
-      prepTime,
-      kCal,
+      prepTime: prepTime || '',
+      kCal: kCal || '',
     };
   })();
 

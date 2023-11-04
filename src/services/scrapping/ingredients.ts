@@ -1,4 +1,6 @@
-export const getIngredients = async (page) => {
+import { Page } from 'puppeteer';
+
+export const getIngredients = async (page: Page) => {
   const ingredientsSelector = await page.$$('[data-test-id="ingredient-item-shipped"]');
   const ingredientList = [];
 
