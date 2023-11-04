@@ -1,6 +1,6 @@
 import { FC, useRef, useState } from 'react';
 import { Layout } from '../../components/Layout/Layout';
-import { MealPreview } from './mealPreview';
+import { MealPreview } from './MealPreview';
 
 const NewMeal: FC = () => {
   const mealUrlRef = useRef<HTMLInputElement | null>(null);

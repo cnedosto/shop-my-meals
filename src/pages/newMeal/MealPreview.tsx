@@ -1,7 +1,7 @@
 import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 import clsx from 'classnames';
 import Image from 'next/image';
-import { FC, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 
 interface MealPreviewProps {
   meal: {
@@ -18,6 +18,10 @@ interface MealPreviewProps {
 export const MealPreview: FC<MealPreviewProps> = ({ meal }) => {
   const [showModal, setShowModal] = useState(true);
   const previewElement = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    setShowModal(true);
+  }, [meal]);
 
   useOnClickOutside(previewElement, (e: MouseEvent): void => {
     setShowModal(false);
