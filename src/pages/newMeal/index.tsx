@@ -12,7 +12,7 @@ const NewMeal: FC = () => {
     const mealUrl = mealUrlRef.current?.value;
 
     if (mealUrl) {
-      fetch('http://localhost:3000/api/newMeal', {
+      fetch('/api/newMeal', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

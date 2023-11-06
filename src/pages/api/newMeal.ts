@@ -16,7 +16,7 @@ type Data = {
   kCal: string | null;
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+export default async function POST(req: NextApiRequest, res: NextApiResponse<Data>) {
   const { url } = req.body;
 
   let scrappedData = null;
