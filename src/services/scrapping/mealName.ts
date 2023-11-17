@@ -1,4 +1,4 @@
-import { Page } from 'puppeteer';
+import { Page } from 'puppeteer-core';
 
 export const getMealName = async (page: Page) => {
   const title = await page.waitForSelector('h1');

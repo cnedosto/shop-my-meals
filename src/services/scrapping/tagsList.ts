@@ -1,4 +1,4 @@
-import { Page } from 'puppeteer';
+import { Page } from 'puppeteer-core';
 
 export const getTagsList = async (page: Page) => {
   const tagsSelector = await page.$$('[data-test-id="recipe-description-tag"]');

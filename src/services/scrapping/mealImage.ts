@@ -1,4 +1,4 @@
-import { Page } from 'puppeteer';
+import { Page } from 'puppeteer-core';
 
 export const getMealImage = async (page: Page) => {
   const recipeImageSelector = await page.waitForSelector('[data-test-id="recipe-hero-image"]');

@@ -1,4 +1,4 @@
-import { Page } from 'puppeteer';
+import { Page } from 'puppeteer-core';
 
 export const getIngredients = async (page: Page) => {
   const ingredientsSelector = await page.$$('[data-test-id="ingredient-item-shipped"]');

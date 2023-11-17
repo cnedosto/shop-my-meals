@@ -1,4 +1,4 @@
-import { Page } from 'puppeteer';
+import { Page } from 'puppeteer-core';
 
 export const getPrepTime = async (page: Page) => {
   const prepTime = await page.evaluate(() => {

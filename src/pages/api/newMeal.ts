@@ -4,9 +4,9 @@ import { getMealImage } from '@/services/scrapping/mealImage';
 import { getMealName } from '@/services/scrapping/mealName';
 import { getPrepTime } from '@/services/scrapping/prepTime';
 import { getTagsList } from '@/services/scrapping/tagsList';
+import chromium from 'chrome-aws-lambda';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import puppeteer from 'puppeteer';
-
+import puppeteer from 'puppeteer-core';
 type Data = {
   title: string;
   image: string;
@@ -16,13 +16,30 @@ type Data = {
   kCal: string | null;
 };
 
-export default async function POST(req: NextApiRequest, res: NextApiResponse<Data>) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   const { url } = req.body;
 
   let scrappedData = null;
 
   scrappedData = await (async () => {
-    const browser = await puppeteer.launch({ headless: false });
+    const options = process.env.AWS_REGION
+      ? {
+          args: chromium.args,
+          executablePath: await chromium.executablePath,
+          headless: chromium.headless,
+        }
+      : {
+          args: [],
+          executablePath:
+            process.platform === 'win32'
+              ? 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
+              : process.platform === 'linux'
+              ? '/usr/bin/google-chrome'
+              : '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+        };
+
+    const browser = await puppeteer.launch(options);
+
     const page = await browser.newPage();
 
     await page.goto(`${url}?locale=fr-BE`);
