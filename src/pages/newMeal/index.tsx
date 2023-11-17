@@ -12,7 +12,7 @@ const NewMeal: FC = () => {
     const mealUrl = mealUrlRef.current?.value;
 
     if (mealUrl) {
-      fetch('/api/newMeal', {
+      fetch('https://shop-my-meals.vercel.app/api/newMeal', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
